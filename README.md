@@ -12,7 +12,7 @@ action包：插件的action类
 handler包：提供对接口返回内容处理，可以理解为将openai的结果与idea交互处理的逻辑
 1.4.0-release 版本使用*gpt-3.5-turbo*模型，详见OpenAiApiUtil类
 
-开发环境：
+**开发环境：**
 IntelliJ IDEA 2019
 gradle
 jdk1.8
