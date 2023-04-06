@@ -1,0 +1,60 @@
+<idea-plugin>
+    <id>com.ljk.JavaHelper</id>
+    <name>javaHelper</name>
+    <vendor email="ljk1026@163.com" url="http://www.xxx.com">JavaHelper</vendor>
+    <version>1.0.2</version>
+    <description><![CDATA[
+    基于chatGPT的代码优化工具.<br>
+    <em>JavaHelper</em>
+    ]]>
+    </description>
+    <change-notes>
+        <![CDATA[
+      <em> 2023-03-24 增加java代码样式、ctrl+alt+c快捷优化</em>
+      <em> 2023-03-24 增加java代码样式</em>
+      <em> 2023-03-38 优化插件UI</em>
+      <em> 2023-04-02 支持接口流处理</em>
+      <em> 2023-04-02 增加代码优化替换功能</em>
+    ]]>
+
+    </change-notes>
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+    <!-- 自定义控制台 -->
+    <!-- 自定义控制台 -->
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow id="JavaHelper" anchor="bottom"
+                    factoryClass="com.ljk.MyToolWindowFactory">
+        </toolWindow>
+
+    </extensions>
+    <!--自定义快捷键 -->
+    <actions>
+        <action id="codeOptimizationAction" class="com.ljk.action.CodeOptimizationAction" text="代码优化">
+             <keyboard-shortcut first-keystroke="control alt c" keymap="$default"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+          </action>
+    </actions>
+
+    <actions>
+        <action id="codeOptimizationReplaceAction" class="com.ljk.action.CodeOptimizationReplaceAction" text="代码优化(替换)">
+            <keyboard-shortcut first-keystroke="control alt r" keymap="$default"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+    </actions>
+
+
+
+    <actions>
+        <!-- Add your actions here -->
+        <action id="toolAction" class="com.ljk.action.ToolAction" text="ToolAction" description="工具开关">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+    </actions>
+    <application-components>
+        <component>
+            <implementation-class>com.ljk.components.TokenChecker</implementation-class>
+        </component>
+    </application-components>
+</idea-plugin>
