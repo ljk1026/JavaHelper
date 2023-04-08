@@ -1,7 +1,7 @@
 package com.ljk;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ljk.components.TokenCheckerComponet;
+import com.ljk.common.SettingConstant;
 import com.theokanning.openai.OpenAiApi;
 import com.theokanning.openai.completion.CompletionChoice;
 import com.theokanning.openai.completion.CompletionRequest;
@@ -30,7 +30,7 @@ public class OpenAiApiUtil {
 
     public static String getAnswerByChat3(String question){
         StringBuilder sb = new StringBuilder();
-        OpenAiService service = new OpenAiService(TokenCheckerComponet.TOKEN,Duration.ofSeconds(100));
+        OpenAiService service = new OpenAiService(SettingConstant.TOKEN,Duration.ofSeconds(100));
         CompletionRequest completionRequest = CompletionRequest.builder()
                 .model("gpt-3.5-turbo")
                 .prompt(question)
@@ -89,7 +89,7 @@ public class OpenAiApiUtil {
         StringBuilder sb = new StringBuilder();
         ObjectMapper mapper = OpenAiService.defaultObjectMapper();
         Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 7890));
-        OkHttpClient client = OpenAiService.defaultClient(TokenCheckerComponet.TOKEN, Duration.ofSeconds(600))
+        OkHttpClient client = OpenAiService.defaultClient(SettingConstant.TOKEN, Duration.ofSeconds(600))
                 .newBuilder()
                 .proxy(proxy)
                 .build();

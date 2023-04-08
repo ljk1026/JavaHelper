@@ -48,6 +48,12 @@ public class ResultPrintHandler implements ResultHandler{
                 sb.append(choice.getMessage().getContent());
             }
         });
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                customTextArea.append("\n");
+            }
+        });
     }
 
 }

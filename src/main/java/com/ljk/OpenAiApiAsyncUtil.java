@@ -1,7 +1,7 @@
 package com.ljk;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ljk.components.TokenCheckerComponet;
+import com.ljk.common.SettingConstant;
 import com.theokanning.openai.OpenAiApi;
 import com.theokanning.openai.completion.chat.ChatCompletionChoice;
 import com.theokanning.openai.completion.chat.ChatCompletionRequest;
@@ -41,7 +41,7 @@ public class OpenAiApiAsyncUtil  {
     public static String getAnswerByChat35(ChatMessage chatMessage){
         ObjectMapper mapper = OpenAiService.defaultObjectMapper();
         Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 7890));
-        OkHttpClient client = OpenAiService.defaultClient(TokenCheckerComponet.TOKEN, Duration.ofSeconds(600))
+        OkHttpClient client = OpenAiService.defaultClient(SettingConstant.TOKEN, Duration.ofSeconds(600))
                 .newBuilder()
                 .proxy(proxy)
                 .build();

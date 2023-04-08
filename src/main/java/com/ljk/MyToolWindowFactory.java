@@ -89,7 +89,7 @@ public class MyToolWindowFactory implements ToolWindowFactory {
             ChatMessage chatMessage = new ChatMessage();
             chatMessage.setContent(question);
             chatMessage.setRole("user");
-            appendAskText(chatMessage.getRole() + ":" + (chatMessage.getContent()) + ("\n"));
+         //   appendAskText(chatMessage.getRole() + ":" + (chatMessage.getContent()) + ("\n"));
             Flowable<ChatCompletionChunk> flowable = OpenAiApiUtil.getAnswerByChat35(chatMessage);
             resultHandler.doHandle(flowable);
             sb = resultHandler.getResultText();

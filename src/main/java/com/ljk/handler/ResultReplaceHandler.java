@@ -125,6 +125,7 @@ public class ResultReplaceHandler implements ResultHandler{
 
             }
         });
+        appendText("\n");
     }
 
     private void appendText(String content) {

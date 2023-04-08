@@ -15,15 +15,24 @@
       <em> 2023-03-38 优化插件UI</em>
       <em> 2023-04-02 支持接口流处理</em>
       <em> 2023-04-02 增加代码优化替换功能</em>
+      <em> 2023-04-07 增加插件配置token项</em>
     ]]>
 
     </change-notes>
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
+
     <depends>com.intellij.modules.platform</depends>
+
+
     <!-- 自定义控制台 -->
     <!-- 自定义控制台 -->
     <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable groupId="com.ljk"
+                                 displayName="JavaHelper Settings"
+                                 instance="com.ljk.JavaHelperSettings"
+                                 id="com.ljk.JavaHelperSettings"/>
+
         <toolWindow id="JavaHelper" anchor="bottom"
                     factoryClass="com.ljk.MyToolWindowFactory">
         </toolWindow>
@@ -52,9 +61,5 @@
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
     </actions>
-    <application-components>
-        <component>
-            <implementation-class>com.ljk.components.TokenChecker</implementation-class>
-        </component>
-    </application-components>
+
 </idea-plugin>
