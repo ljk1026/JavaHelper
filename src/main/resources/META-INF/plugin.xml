@@ -2,7 +2,7 @@
     <id>com.ljk.JavaHelper</id>
     <name>javaHelper</name>
     <vendor email="ljk1026@163.com" url="http://www.xxx.com">JavaHelper</vendor>
-    <version>1.0.2</version>
+    <version>1.6.0</version>
     <description><![CDATA[
     基于chatGPT的代码优化工具.<br>
     <em>JavaHelper</em>
@@ -45,7 +45,12 @@
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
           </action>
     </actions>
-
+    <actions>
+        <action id="codeExplainAction" class="com.ljk.action.CodeExplainAction" text="代码解释">
+            <keyboard-shortcut first-keystroke="control alt e" keymap="$default"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+    </actions>
     <actions>
         <action id="codeOptimizationReplaceAction" class="com.ljk.action.CodeOptimizationReplaceAction" text="代码优化(替换)">
             <keyboard-shortcut first-keystroke="control alt r" keymap="$default"/>
@@ -54,12 +59,5 @@
     </actions>
 
 
-
-    <actions>
-        <!-- Add your actions here -->
-        <action id="toolAction" class="com.ljk.action.ToolAction" text="ToolAction" description="工具开关">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
-        </action>
-    </actions>
 
 </idea-plugin>

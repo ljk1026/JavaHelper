@@ -81,22 +81,33 @@ public class OpenAiApiUtil {
     }
 
     /**
+     * 获取OpenAiService
+     * @return
+     */
+    private static OpenAiService getService(){
+        if(SettingConstant.ENABLE_PROXY){
+            ObjectMapper mapper = OpenAiService.defaultObjectMapper();
+            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(SettingConstant.PROXY_HOSTNAME,Integer.valueOf(SettingConstant.PROXY_PORT) ));
+            OkHttpClient client = OpenAiService.defaultClient(SettingConstant.TOKEN, Duration.ofSeconds(Long.valueOf(SettingConstant.PROXY_TIMEOUT)))
+                    .newBuilder()
+                    .proxy(proxy)
+                    .build();
+            Retrofit retrofit = defaultRetrofit(client, mapper);
+            OpenAiApi api = retrofit.create(OpenAiApi.class);
+            return new OpenAiService(api);
+        }else{
+            return new OpenAiService(SettingConstant.TOKEN,Duration.ofSeconds(Long.valueOf(SettingConstant.PROXY_TIMEOUT)));
+        }
+    }
+
+    /**
      * 基于ChatGPT3.5模型的流处理
      * @param chatMessage
      * @return
      */
     public static Flowable<ChatCompletionChunk> getAnswerByChat35(ChatMessage chatMessage){
         StringBuilder sb = new StringBuilder();
-        ObjectMapper mapper = OpenAiService.defaultObjectMapper();
-        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 7890));
-        OkHttpClient client = OpenAiService.defaultClient(SettingConstant.TOKEN, Duration.ofSeconds(600))
-                .newBuilder()
-                .proxy(proxy)
-                .build();
-        Retrofit retrofit = defaultRetrofit(client, mapper);
-        OpenAiApi api = retrofit.create(OpenAiApi.class);
-
-        OpenAiService service = new OpenAiService(api);
+        OpenAiService service = getService();
         messagesList.add(chatMessage);
         ChatCompletionRequest request = ChatCompletionRequest.builder()
                 .model("gpt-3.5-turbo")
