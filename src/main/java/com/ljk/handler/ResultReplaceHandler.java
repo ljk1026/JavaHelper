@@ -74,55 +74,33 @@ public class ResultReplaceHandler implements ResultHandler{
             });
         });
 
-        final AtomicReference<Integer> codeSwitch = new AtomicReference<>(0);
+        //完整的语句
+        final StringBuilder wholeSb = new StringBuilder();
+
         flowable.blockingForEach(m -> {
             for (ChatCompletionChoice choice : m.getChoices()) {
+                //当前是否完成的词句
+                boolean wholeCode = false;
                 String content = choice.getMessage().getContent();
                 if (StringUtils.isEmpty(content)) {
                     return;
                 }
                 String answerText = content;
+                if(content.contains("\n")){
+                    wholeCode = true;
+                }
+                wholeSb.append(content);
                 MyToolWindowFactory.appendAnswerText(answerText);
-                // 0 初始化状态，1注释临界，2注释结尾，3Java代码输出中
-                switch (codeSwitch.get()) {
-                    case 0:
-                        // 注释代码中
-                        codeSwitch.set(1);
-                        if (!"```".equals(content)) {
-                            content = "/**" + content;
-                        }else {
-                            content = "/**";
-                        }
-                        break;
-                    case 1:
-                        if ("```".equals(content)) {
-                            codeSwitch.set(2);
-                        }
-                        if ("java".equals(content)) {
-                            codeSwitch.set(3);
-                            content = "";
-                        }
-                        break;
-                    case 2:
-                        if ("java".equals(content)) {
-                            codeSwitch.set(3);
-                            content = "";
-                        }
-                        break;
-                    case 3:
-                        if ("```".equals(content) || "```\n".equals(content)) {
-                            codeSwitch.set(1);
-                            content = "/**";
-                        }
-                        break;
-                    default:
-                        break;
-                }
-                // 写入文本
-                if(3 == codeSwitch.get()){
-                    appendText(content);
-                }
+                if(wholeCode){
+                    //如果是完整的一句，就情况，并且判断是否为```,如果不是才输出
+                   String wholeStr =  wholeSb.toString();
+                    wholeSb.delete(0,wholeSb.length());
+                    if(wholeStr.trim().equals("```") || wholeStr.trim().equals("```\n")){
+                        continue;
+                    }
+                    appendText(wholeStr);
 
+                }
             }
         });
         appendText("\n");

@@ -16,6 +16,7 @@
       <em> 2023-04-02 支持接口流处理</em>
       <em> 2023-04-02 增加代码优化替换功能</em>
       <em> 2023-04-07 增加插件配置token项</em>
+      <em> 2023-05-07 增加完成代码</em>
     ]]>
 
     </change-notes>
@@ -25,7 +26,6 @@
     <depends>com.intellij.modules.platform</depends>
 
 
-    <!-- 自定义控制台 -->
     <!-- 自定义控制台 -->
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable groupId="com.ljk"
@@ -57,7 +57,12 @@
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </action>
     </actions>
-
+    <actions>
+        <action id="codeCompletionAction" class="com.ljk.action.CodeCompletionAction" text="代码完成">
+            <keyboard-shortcut first-keystroke="control alt d" keymap="$default"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+    </actions>
 
 
 </idea-plugin>

@@ -9,17 +9,16 @@ import com.intellij.openapi.project.Project;
 import com.ljk.MyToolWindowFactory;
 import com.ljk.OpenAiApiUtil;
 import com.ljk.handler.ResultHandler;
-import com.ljk.handler.ResultPrintHandler;
 import com.ljk.handler.ResultReplaceHandler;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * 代码优化普通模式
- * 通过选中的代码进行请求chatGPT进行输出优化结果
+ * 代码完成
+ * 完成选中代码中的todo信息
  * @Author: liujiankun
- * @Date: 2023/3/14 12:19
+ * @Date: 2023-05-06 10:33:14
  */
-public class CodeOptimizationReplaceAction extends AnAction {
+public class CodeCompletionAction extends AnAction {
 
 
     @Override
@@ -30,7 +29,7 @@ public class CodeOptimizationReplaceAction extends AnAction {
         if (editor == null) {
             return;
         }
-        final String selectedText = "优化以下代码，输出完整的java代码，同时在代码开头和结尾加上```   \n代码：" + editor.getSelectionModel().getSelectedText();
+        final String selectedText = "完成以下todo部分的代码，输出完整的java代码，同时在代码开头和结尾加上```   \n 代码：" + editor.getSelectionModel().getSelectedText();
 
         if (selectedText == null) {
             return;

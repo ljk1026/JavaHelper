@@ -29,7 +29,7 @@ public class CodeOptimizationAction extends AnAction {
         if (editor == null) {
             return;
         }
-        final String selectedText = "优化以下代码，并且java代码部分使用```  ```包含:\n" + editor.getSelectionModel().getSelectedText();
+        final String selectedText = "优化以下代码，输出java代码，代码开头和结尾加上```   \n代码：" + editor.getSelectionModel().getSelectedText();
         if (selectedText == null) {
             return;
         }
