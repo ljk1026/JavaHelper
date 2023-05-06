@@ -2,7 +2,7 @@
     <id>com.ljk.JavaHelper</id>
     <name>javaHelper</name>
     <vendor email="ljk1026@163.com" url="http://www.xxx.com">JavaHelper</vendor>
-    <version>1.6.0</version>
+    <version>1.7.0</version>
     <description><![CDATA[
     基于chatGPT的代码优化工具.<br>
     <em>JavaHelper</em>
