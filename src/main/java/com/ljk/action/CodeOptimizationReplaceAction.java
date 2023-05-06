@@ -30,7 +30,7 @@ public class CodeOptimizationReplaceAction extends AnAction {
         if (editor == null) {
             return;
         }
-        final String selectedText = "优化以下代码，输出完整的java代码，同时在代码开头和结尾加上```   \n代码：" + editor.getSelectionModel().getSelectedText();
+        final String selectedText = "优化以下代码，输出完整的java代码，同时在代码开头和结尾加上```   \n" + editor.getSelectionModel().getSelectedText();
 
         if (selectedText == null) {
             return;

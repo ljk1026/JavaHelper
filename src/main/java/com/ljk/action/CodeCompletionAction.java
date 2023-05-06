@@ -29,7 +29,7 @@ public class CodeCompletionAction extends AnAction {
         if (editor == null) {
             return;
         }
-        final String selectedText = "完成以下todo部分的代码，输出完整的java代码，同时在代码开头和结尾加上```   \n 代码：" + editor.getSelectionModel().getSelectedText();
+        final String selectedText = "完成以下todo部分的代码，输出完整的java代码，同时在代码开头和结尾加上```   \n" + editor.getSelectionModel().getSelectedText();
 
         if (selectedText == null) {
             return;
